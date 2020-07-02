@@ -1,4 +1,4 @@
-# lsip
+# abreip
 
 Light Server IP
 
