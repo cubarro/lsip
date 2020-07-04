@@ -1,14 +1,15 @@
-// Servidor web
-// https://stackoverflow.com/a/44667294/694915
-const rnd = require('random')
-const { exec } = require('child_process');
-var os = require('os')
-var p = rnd.int(min = 9000, max = 20000)
+var os = require('os');
+var rnd = require('random');
+var sp = require('child_process').spawn
+var ls = require('light-server')
 
-console.log( '*** ^C para cancelar *** ' )
-console.log( 'Servidor ', os.hostname() )
-console.log( 'Exponiendo a la web en puerto ', p )
-console.log( 'Dirección IP ' )
+var min = 9000; var max = 20000 ;
+var p = rnd.int(min = min, max = max);
+
+console.log( '*** ^C para cancelar *** ' );
+console.log( 'Servidor ', os.hostname() );
+console.log( 'Exponiendo a la web en puerto ', p );
+console.log( 'Dirección IP ' );
 
 var ifaces = os.networkInterfaces();
 
@@ -28,13 +29,14 @@ Object.keys(ifaces).forEach(function (ifname) {
   });
 });
 
-var llamada = 'light-server -s . -p ' + p + ' -o'
-exec(llamada,
-        (error, stdout, stderr) => {
-            console.log(stdout)
-            console.log(stderr)
-            if (error !== null) {
-                console.log(`exec error: ${error}`);
-            }
-        }
-	)
+if ( os.type().substring(-3,3) == 'Win') {
+	// Es windows
+	consola = 'cmd'
+} else {
+	// No es windows
+	consola = 'bash'
+}
+
+var llamada = 'light-server -s . -p ' + p + ' -o' ;
+// ls( '-P 9090 -O' )
+sp(consola, ['/c', llamada ], { stdio: 'inherit'})
