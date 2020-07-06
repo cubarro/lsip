@@ -7,7 +7,7 @@
     "start": "node ./indice.js"
   },
   "bin": {
-    "abreip": "./indice.js"
+    "abreip": "./abririp.js"
   },
   "author": "cubarro <cubarro@gmail.com>",
   "license": "MIT",
